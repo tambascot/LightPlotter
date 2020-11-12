@@ -1,6 +1,6 @@
-package com.tonytambasco.lightplotter
+package com.tonytambasco.lightplotter;
 
-private class FocalPoint {
+public class FocalPoint {
 
   int pointNumber;  // a number for each focal point in the plot
   String name;      // the name of the Focal Point
