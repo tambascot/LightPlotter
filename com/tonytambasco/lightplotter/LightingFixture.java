@@ -25,7 +25,7 @@ class LightingFixture {
   
   public LightingFixture(int number) {
     /* The only thing we need to define when creating a new lighting fixture is its number. This should
-       be a UNIQUE integer that is tracked, incrimented, and checked by the calling method. But, in
+       be a UNIQUE integer that is tracked, incremented, and checked by the calling method. But, in
        practice, if the calling method wants to track a fixture in some other way, it can */
     fixtureNumber = number;
   }
@@ -110,5 +110,84 @@ class LightingFixture {
 	  return pos_z;
   }
   
+  public void setFixtureNumber(int fixtureNumber) {
+	  this.fixtureNumber = fixtureNumber;
+  }
+  
+  public void setMake(String make) {
+	  this.make = make;
+  }
+  
+  public void setModel(String model) {
+	  this.model = model;
+  }
+  
+  public void setBeamAngle(int beamAngle) {
+	  this.beamAngle = beamAngle;
+  }
+  
+  public void setFieldAngle(int fieldAngle) {
+	  this.fieldAngle = fieldAngle;
+  }
+  
+  public void setWatts(int watts) {
+	  this.watts = watts;
+  }
+  
+  public void setVolts(int volts) {
+	  this.volts = volts;
+  }
+  
+  public void setWeight(float weight) {
+	  this.weight = weight;
+  }
+  
+  public void setColor(String color) {
+	  this.color = color;
+  }
+  
+  public void setColorFrame(String colorFrame) {
+	  this.colorFrame = colorFrame;
+  }
+  
+  public void setPattern(String pattern) {
+	  this.pattern = pattern;
+  }
+  
+  public void setPatternSize(String patternSize) {
+	  this.patternSize = patternSize;
+  }
+  
+  public void setAccessory(String accessory) {
+	  this.accessory = accessory;
+  }
+  
+  public void setSymbol(String symbol) {
+	  this.symbol = symbol;
+  }
+  
+  public void setFP(FocalPoint fp) {
+	  this.fp = fp;
+  }
+  
+  public void setHP(HangPoint hp) {
+	  this.hp = hp;
+  }
+  
+  public void setNotes(String notes) {
+	  this.notes = notes;
+  }
+  
+  public void setPos_x(int pos_x) {
+	  this.pos_x = pos_x;
+  }
+  
+  public void setPos_y(int pos_y) {
+	  this.pos_y = pos_y;
+  }
+  
+  public void setPos_z(int pos_z) {
+	  this.pos_z = pos_z;
+  }
 
 }
