@@ -2,7 +2,8 @@ package com.tonytambasco.lightplotter;
 
 class LightingFixture {
 
-  private int fixtureNumber  = 0;    // a number for each lighting fixture in the plot.
+  private int fixtureNumber  = 0;    // a number for the lighting fixture. Intended to be unique.
+  private String name		 = null; // a name for the lighting fixture.  Intended to be unique.
   private String make 		 = null; // The manufacturer of the fixture
   private String model 		 = null; // The manufacturer's name for the fixture
   private int beamAngle 	 = 0;    // The angle of the beam, the narrower, brighter cone of light
@@ -23,13 +24,39 @@ class LightingFixture {
   private int pos_y 		 = 0;    // The Y position of the fixture.
   private int pos_z 		 = 0;    // The Z position of the fixture.
   
-  public LightingFixture(int number) {
-    /* The only thing we need to define when creating a new lighting fixture is its number. This should
-       be a UNIQUE integer that is tracked, incremented, and checked by the calling method. But, in
-       practice, if the calling method wants to track a fixture in some other way, it can */
-    fixtureNumber = number;
+  /**
+   * Returns a lighting fixture object with no parameters.
+   */
+  public LightingFixture() {
+	  
   }
   
+  /**
+   * Returns a lighting fixture object with parameters available from the catalog page of most lighting fixtures. This will
+   * allow us to more easily create a fixture library.
+   * @param make
+   * @param model
+   * @param beamAngle
+   * @param fieldAngle
+   * @param watts
+   * @param volts
+   * @param weight
+   * @param colorFrame
+   * @param symbol
+   */
+  public LightingFixture(String make, String model, int beamAngle, int fieldAngle, int watts, int volts,
+		  float weight, String colorFrame, String symbol) {
+	  this.make 		 = make;
+	  this.model 		 = model;
+	  this.beamAngle 	 = beamAngle;
+	  this.fieldAngle 	 = fieldAngle;
+	  this.watts 		 = watts;
+	  this.volts 		 = volts;
+	  this.weight 		 = weight;
+	  this.colorFrame 	 = colorFrame;
+	  this.symbol 		 = symbol;
+  }
+   
   public int getFixtureNumber() {
 	  return fixtureNumber;
   }
