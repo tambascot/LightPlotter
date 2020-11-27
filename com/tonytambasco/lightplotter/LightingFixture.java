@@ -1,16 +1,18 @@
 package com.tonytambasco.lightplotter;
 
+import java.awt.geom.Point2D;
+
 class LightingFixture {
 
   private int fixtureNumber  = 0;    // a number for the lighting fixture. Intended to be unique.
   private String name		 = null; // a name for the lighting fixture.  Intended to be unique.
   private String make 		 = null; // The manufacturer of the fixture
   private String model 		 = null; // The manufacturer's name for the fixture
-  private int beamAngle 	 = 0;    // The angle of the beam, the narrower, brighter cone of light
-  private int fieldAngle 	 = 0;    // The angle of the field, the wider cone of light that is the standard meaure 
+  private Double beamAngle 	 = null; // The angle of the beam, the narrower, brighter cone of light
+  private Double fieldAngle  = null; // The angle of the field, the wider cone of light that is the standard meaure 
   private int watts 		 = 0;    // The power draw of the lighting fixture
   private int volts 		 = 0;    // The voltage of the lighting fixture
-  private float weight 		 = 0;    // The weight of the lighting fixture
+  private Double weight 	 = null; // The weight of the lighting fixture
   private String color 		 = null; // The gel color(s) of a lighting fixture, if any
   private String colorFrame  = null; // The size of the color frame of the fixture
   private String pattern 	 = null; // The pattern(s) used in the fixture, if any
@@ -20,9 +22,9 @@ class LightingFixture {
   private FocalPoint fp 	 = null; // The focal point the fixture targets.
   private HangPoint hp	 	 = null; // The place the lighting fixture is attached to (i.e. 1E, Box Boom L)
   private String notes 	 	 = null; // Misc notes about the fixture.
-  private int pos_x 		 = 0;    // The X position of the fixture.
-  private int pos_y 		 = 0;    // The Y position of the fixture.
-  private int pos_z 		 = 0;    // The Z position of the fixture.
+  private Double pos_x 		 = null; // The X position of the fixture.
+  private Double pos_y 		 = null; // The Y position of the fixture.
+  private Double pos_z 		 = null; // The Z position of the fixture.
   
   /**
    * Returns a lighting fixture object with no parameters.
@@ -44,8 +46,8 @@ class LightingFixture {
    * @param colorFrame
    * @param symbol
    */
-  public LightingFixture(String make, String model, int beamAngle, int fieldAngle, int watts, int volts,
-		  float weight, String colorFrame, String symbol) {
+  public LightingFixture(String make, String model, Double beamAngle, Double fieldAngle, int watts, int volts,
+		  Double weight, String colorFrame, String symbol) {
 	  this.make 		 = make;
 	  this.model 		 = model;
 	  this.beamAngle 	 = beamAngle;
@@ -69,11 +71,11 @@ class LightingFixture {
 	  return model;
   }
   
-  public int getBeamAngle() {
+  public Double getBeamAngle() {
 	  return beamAngle;
   }
   
-  public int getFieldAngle() {
+  public Double getFieldAngle() {
 	  return fieldAngle;
   }
   
@@ -85,7 +87,7 @@ class LightingFixture {
 	  return volts;
   }
   
-  public float getWeight() {
+  public Double getWeight() {
 	  return weight;
   }
   
@@ -125,15 +127,15 @@ class LightingFixture {
 	  return notes;
   }
   
-  public int getPos_x() {
+  public double getPos_x() {
 	  return pos_x;
   }
   
-  public int getPos_y() {
+  public double getPos_y() {
 	  return pos_y;
   }
   
-  public int getPos_z() {
+  public double getPos_z() {
 	  return pos_z;
   }
   
@@ -149,11 +151,11 @@ class LightingFixture {
 	  this.model = model;
   }
   
-  public void setBeamAngle(int beamAngle) {
+  public void setBeamAngle(Double beamAngle) {
 	  this.beamAngle = beamAngle;
   }
   
-  public void setFieldAngle(int fieldAngle) {
+  public void setFieldAngle(Double fieldAngle) {
 	  this.fieldAngle = fieldAngle;
   }
   
@@ -165,7 +167,7 @@ class LightingFixture {
 	  this.volts = volts;
   }
   
-  public void setWeight(float weight) {
+  public void setWeight(Double weight) {
 	  this.weight = weight;
   }
   
@@ -205,16 +207,38 @@ class LightingFixture {
 	  this.notes = notes;
   }
   
-  public void setPos_x(int pos_x) {
+  public void setPos_x(double pos_x) {
 	  this.pos_x = pos_x;
   }
   
-  public void setPos_y(int pos_y) {
+  public void setPos_y(double pos_y) {
 	  this.pos_y = pos_y;
   }
   
-  public void setPos_z(int pos_z) {
+  public void setPos_z(double pos_z) {
 	  this.pos_z = pos_z;
+  }
+  
+  public double getFieldDiamater() throws FieldAngleNotDefinedException, FocalPointNotDefinedException {
+	  if (fieldAngle == 0) {
+		  throw new FieldAngleNotDefinedException(
+				  "Field Angle not defined.");
+	  }
+	   
+	  if (fp == null) {
+		  throw new FocalPointNotDefinedException(
+				  "Focal point not defined.");
+	  }
+	  
+	  /*
+	   * Need to define Exceptions for pos_x, y, and z not defined, ngkugjhgfhjfvhjv
+	   */
+	  
+	  double leg_a = Point2D.distance(pos_x, pos_y, fp.getPos_x(), fp.getPos_y());
+	  double hypot = Math.hypot(leg_a, this.pos_z - fp.getPos_z());
+	  double diameter = 2 * (hypot * Math.tan(fieldAngle));
+	  
+	  return diameter;
   }
 
 }
